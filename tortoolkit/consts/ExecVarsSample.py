@@ -13,6 +13,8 @@ except:
         # ALLOWED USERS [ids of user or supergroup] seperate by commas
         ALD_USR = [496011127, -1001400532988]
         
+        GD_INDEX_URL = os.environ.get("GD_INDEX_URL")
+
         # Time to wait before edit message
         EDIT_SLEEP_SECS = 5
 
