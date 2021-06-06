@@ -18,7 +18,7 @@ async def rclone_driver(path,message, user_msg):
     # get the default drive
     conf_path = await get_config()
     if conf_path is None:
-        torlog.info("The confi file not found")
+        torlog.info("The config file not found")
         return None
     else:
         drive_name = get_val("DEF_RCLONE_DRIVE")
@@ -39,7 +39,7 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
     data = "upcancel {} {} {}".format(omsg.chat_id,omsg.id,omsg.sender_id)
     buts = [KeyboardButtonCallback("Cancel upload.",data.encode("UTF-8"))]
     
-    msg = await message.reply("<b>Uploading to configured drive.... will be updated soon.",parse_mode="html", buttons=buts)
+    msg = await message.reply("<b>Uploading to configured RCLONE drive.",parse_mode="html", buttons=buts)
     if os.path.isdir(path):
         # handle dirs
         new_dest_base = os.path.join(dest_base,os.path.basename(path))
