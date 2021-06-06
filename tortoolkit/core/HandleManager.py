@@ -378,7 +378,7 @@ async def handle_upcancel_cb(e):
 
     if str(e.sender_id) == data[3]:
         db.cancel_download(data[1],data[2])
-        await e.answer("CANCLED UPLOAD")
+        await e.answer("Cancelled Upload.")
     else:
         await e.answer("You can't cancel other uploads!",alert=True)
 
@@ -405,7 +405,7 @@ async def callback_handler_canc(e):
         torlog.info(f"Hashid :- {hashid}")
 
         await cancel_torrent(hashid, is_aria)
-        await e.answer("The torrent has been cancled ;)",alert=True)
+        await e.answer("The torrent has been cancelled.",alert=True)
     elif e.sender_id in get_val("ALD_USR"):
         hashid = data[1]
         hashid = hashid.strip("'")
@@ -413,9 +413,9 @@ async def callback_handler_canc(e):
         torlog.info(f"Hashid :- {hashid}")
         
         await cancel_torrent(hashid, is_aria)
-        await e.answer("The torrent has been cancled in ADMIN MODE XD ;)",alert=True)
+        await e.answer("The torrent has been cancelled by an admin",alert=True)
     else:
-        await e.answer("You can cancel only your torrents ;)", alert=True)
+        await e.answer("You can cancel only your torrents!", alert=True)
 
 
 async def handle_exec_message_f(e):
