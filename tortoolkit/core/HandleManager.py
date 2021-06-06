@@ -606,9 +606,9 @@ async def about_me(message):
     val1  = get_val("RSTUFF")
     if val1 is not None:
         if val1:
-            rclone_m = "Rclone mod is applied."
+            rclone_m = "RCLONE mod is applied."
         else:
-            rclone_m = "Rclone mod is not applied."
+            rclone_m = "RCLONE mod is not applied."
     else:
         rclone_m = "N/A"
 
@@ -626,7 +626,7 @@ async def about_me(message):
         f"<b>Leech:- </b> <code>{leen}</code>\n"
         f"<b>Rclone:- </b> <code>{rclone}</code>\n"
         f"<b>Rclone Mod :- </b> <code>{rclone_m}</code> \n"
-        f"<b>User Caps(Limits) :- </b> <code>In-progress</code> \n""
+        f"<b>User Caps(Limits) :- </b> <code>In-progress</code> \n"
     )
 
     await message.reply(msg,parse_mode="html")
