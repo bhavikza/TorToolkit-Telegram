@@ -114,8 +114,8 @@ def progress_bar(percentage):
     """Returns a progress bar for download
     """
     #percentage is on the scale of 0-1
-    comp = "▰"
-    ncomp = "▱"
+    comp = "█"
+    ncomp = "▒"
     pr = ""
 
     try:
