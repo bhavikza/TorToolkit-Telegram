@@ -64,12 +64,24 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
 
         torlog.info("Upload complete")
         gid = await get_glink(dest_drive,dest_base,os.path.basename(path),conf_path)
-        torlog.info(f"Upload folder id :- {gid}")
-        
-        folder_link = f"https://drive.google.com/folderview?id={gid}"
-        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#botuploads\n📁 <code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))
-        
-        await omsg.reply(txtmsg,buttons=[[KeyboardButtonUrl("Drive URL",folder_link)]],parse_mode="html")
+	    torlog.info(f"Upload folder id :- {gid}")	
+        	
+        folder_link = f"https://drive.google.com/folderview?id={gid[0]}"	
+        buttons = []	
+        buttons.append(	
+            [KeyboardButtonUrl("Drive URL",folder_link)]	
+        )	
+        gd_index = get_val("GD_INDEX_URL")	
+        if gd_index:	
+            index_link = "{}/{}/".format(gd_index.strip("/"), gid[1])	
+            index_link = requote_uri(index_link)	
+            torlog.info("index link "+str(index_link))	
+            buttons.append(	
+                [KeyboardButtonUrl("Index URL",index_link)]	
+            )	
+        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#botuploads\n📁 <code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))	
+        	
+        await omsg.reply(txtmsg,buttons=buttons,parse_mode="html")
         await msg.delete()
 
 
