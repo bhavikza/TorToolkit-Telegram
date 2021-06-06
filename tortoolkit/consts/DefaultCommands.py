@@ -14,3 +14,4 @@ class Commands:
     GETLOGS = os.environ.get("GETLOGS_CMD")
     SERVER = os.environ.get("SERVER_CMD")
     USERSETTINGS = os.environ.get("USERSETTINGS_CMD")
+    SPEEDTEST = os.environ.get("SPEEDTEST")

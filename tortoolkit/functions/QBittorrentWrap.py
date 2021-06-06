@@ -198,7 +198,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
                 human_readable_bytes(tor_info.downloaded),
                 human_readable_bytes(tor_info.total_size)
                 )
-            msg += "<b>ETA:</b> <b>{} Mins</b>\n".format(
+            msg += "<b>ETA:</b> <b>{}</b>\n".format(
                 human_readable_timedelta(tor_info.eta)
                 )
             msg += "<b>S:</b>{} <b>L:</b>{}\n".format(
@@ -238,7 +238,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
                         await message.edit("Download path location failed", buttons=None)
                         return None
 
-                    await message.edit("<b>Download complete</b> ```{}```. To path ```{}```".format(tor_info.name,tor_info.save_path),buttons=None)
+                    await message.edit("Download complete ```{}``` To path: ```{}```".format(tor_info.name,tor_info.save_path),buttons=None)
                     return [savepath, tor_info.hash]
                 else:
                     #return await update_progress(client,message,torrent)

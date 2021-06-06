@@ -115,7 +115,7 @@ Torrent Files
   <div class="form-group">
     <label for="pin_code">Pin Code</label>
     <input type="text" class="form-control" name="pin_code" placeholder="Enter code to access the torrent">
-    <small class="form-text text-muted">Dont mess around. You download will get messed up.</small>
+    <small class="form-text text-muted">Enter your pincode only to avoid download errors.</small>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

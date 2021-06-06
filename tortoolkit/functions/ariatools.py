@@ -199,7 +199,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
                 aria2, gid, event, previous_message,user_msg=mes
             )
         else:
-            await event.edit(f"<b>Download complete:</b> <code>{file.name}</code> to path <code>{file.name}</code>",parse_mode="html", buttons=None)
+            await event.edit(f"Download complete: <code>{file.name}</code> to path <code>{file.name}</code>",parse_mode="html", buttons=None)
             return True
     except aria2p.client.ClientException as e:
         if " not found" in str(e) or "'file'" in str(e):
