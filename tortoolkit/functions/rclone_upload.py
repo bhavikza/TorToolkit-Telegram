@@ -3,6 +3,7 @@
 import os,subprocess,logging,re,time,json,traceback
 from telethon.tl.types import KeyboardButtonUrl
 from tortoolkit import SessionVars
+from requests.utils import requote_uri
 import asyncio as aio
 import aiohttp
 from ..core.getVars import get_val
@@ -60,11 +61,10 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
             await msg.delete()
             rclone_pr.kill()
             return True
-            
 
         torlog.info("Upload complete")
         gid = await get_glink(dest_drive,dest_base,os.path.basename(path),conf_path)
-	    torlog.info(f"Upload folder id :- {gid}")	
+	    #torlog.info(f"Upload folder id :- {gid}")
         	
         folder_link = f"https://drive.google.com/folderview?id={gid[0]}"	
         buttons = []	
