@@ -6,6 +6,7 @@ from telethon.tl.types import KeyboardButtonCallback
 from ..consts.ExecVarsSample import ExecVars
 from ..core.getCommand import get_command
 from ..core.getVars import get_val
+from ..core.speedtest import get_speed
 from ..functions.Leech_Module import check_link,cancel_torrent,pause_all,resume_all,purge_all,get_status,print_files, get_transfer
 from ..functions.tele_upload import upload_a_file,upload_handel
 from ..functions import Human_Format
@@ -195,7 +196,7 @@ async def handle_leech_command(e):
                 [KeyboardButtonCallback("Extract from ZIP.[Toggle]", data=f"leechzipex toggleex {tsp}")]
         )
         
-        conf_mes = await e.reply("<b>First click if you want to zip the contents or extract as an archive (only one will work at a time) then. </b>\n<b>Choose where to uploadyour files:- </b>\nThe files will be uploaded to default destination after 60 sec of no action by user.",parse_mode="html",buttons=buts)
+        conf_mes = await e.reply("<b>Do you want to zip the contents or extract as an archive?</b>\n Choose where to upload your files: \n<i>The files will be uploaded to default destination after 60 sec of no action.</i>",parse_mode="html",buttons=buts)
         
         # zip check in background
         ziplist = await get_zip_choice(e,tsp)
@@ -379,7 +380,7 @@ async def handle_upcancel_cb(e):
         db.cancel_download(data[1],data[2])
         await e.answer("CANCLED UPLOAD")
     else:
-        await e.answer("Cant Cancel others upload 😡",alert=True)
+        await e.answer("You can't cancel other uploads!",alert=True)
 
 
 async def callback_handler_canc(e):
@@ -474,7 +475,7 @@ async def handle_pincode_cb(e):
 
         
     else:
-        await e.answer("Its not you torrent.",alert=True)
+        await e.answer("It's not your torrent.",alert=True)
 
 async def upload_document_f(message):
     imsegd = await message.reply(
