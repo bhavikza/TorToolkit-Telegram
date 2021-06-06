@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 from telethon.tl.types import KeyboardButtonCallback,KeyboardButton
 from telethon import events
@@ -217,7 +216,7 @@ async def handle_settings(e,edit=False,msg="",submenu=None,session_id=None):
     if submenu is None:
         await get_bool_variable("LOCKED_USERS","Lock the Group",menu,"usrlock",session_id)
         await get_bool_variable("FORCE_DOCUMENTS","FORCE_DOCUMENTS",menu,"fdocs",session_id)
-        await get_bool_variable("METAINFO_BOT","[MetainfoRoBot]Get metadata of files in this group.",menu,"metainfo",session_id)
+        await get_bool_variable("METAINFO_BOT","Get metadata of files in this group.",menu,"metainfo",session_id)
         await get_string_variable("COMPLETED_STR",menu,"compstr",session_id)
         await get_string_variable("REMAINING_STR",menu,"remstr",session_id)
         await get_int_variable("TG_UP_LIMIT",menu,"tguplimit",session_id)
@@ -225,17 +224,17 @@ async def handle_settings(e,edit=False,msg="",submenu=None,session_id=None):
         await get_int_variable("MAX_YTPLAYLIST_SIZE",menu,"maxytplsize",session_id)
         await get_int_variable("EDIT_SLEEP_SECS",menu,"editsleepsec",session_id)
         #await get_string_variable("RCLONE_CONFIG",menu,"rcloneconfig",session_id)
-        await get_sub_menu("☁️ Open Rclone Menu ☁️","rclonemenu",session_id,menu)
-        await get_sub_menu("🕹️ Control Actions 🕹️","ctrlacts",session_id,menu)
+        await get_sub_menu("☁️ Open Rclone Menu","rclonemenu",session_id,menu)
+        await get_sub_menu("🕹️ Control Actions","ctrlacts",session_id,menu)
         menu.append(
             [KeyboardButtonCallback("Close Menu",f"settings selfdest {session_id}".encode("UTF-8"))]
         )
 
 
         if edit:
-            rmess = await e.edit(header+"\nIts recommended to lock the group before setting vars.\n"+msg,parse_mode="html",buttons=menu,link_preview=False)
+            rmess = await e.edit(header+"\nIt's recommended to lock the group before setting vars.\n"+msg,parse_mode="html",buttons=menu,link_preview=False)
         else:
-            rmess = await e.reply(header+"\nIts recommended to lock the group before setting vars.\n",parse_mode="html",buttons=menu,link_preview=False)
+            rmess = await e.reply(header+"\nIt's recommended to lock the group before setting vars.\n",parse_mode="html",buttons=menu,link_preview=False)
     elif submenu == "rclonemenu":
         rcval = await get_string_variable("RCLONE_CONFIG",menu,"rcloneconfig",session_id)
         if rcval != "None":

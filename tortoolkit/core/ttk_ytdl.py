@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import asyncio,shlex,logging,time,os,aiohttp,shutil
 import orjson as json
@@ -156,7 +155,7 @@ async def handle_ytdl_command(e: MessageLike):
         await e.reply("Reply to a youtube video link.")
         return
     msg = await e.get_reply_message()
-    msg1 = await e.reply("Processing the given link.....")
+    msg1 = await e.reply("Processing the link...")
     if msg.text.find("http") != -1:
         res, err = await create_quality_menu(msg.text.strip(),msg1,msg)
         if res is None:
@@ -335,7 +334,7 @@ async def handle_ytdl_playlist(e: MessageLike) -> None:
     try:
         out, err = await asyncio.wait_for(cli_call(cmd),300)
     except asyncio.TimeoutError:
-        await msg.edit("Processing time exceeded... The playlist seem to long to be worked with 😢\n If the playlist is short and you think its error report back.")
+        await msg.edit("Error: The playlist contains too many videos to handle")
         return
     
     if err:
@@ -347,7 +346,7 @@ async def handle_ytdl_playlist(e: MessageLike) -> None:
         pldata = json.loads(out)
         entities = pldata.get("entries")
         if len(entities) <= 0:
-            await msg.edit("Cannot load the videos from this playlist ensure that the playlist is not <code>'My Mix or Mix'</code>. It shuold be a public or unlisted youtube playlist.")
+            await msg.edit("Cannot load the videos from this playlist ensure that the playlist is not <code>'My Mix or Mix'</code>. It should be a public or unlisted youtube playlist.")
             return
 
         entlen = len(entities)
@@ -398,12 +397,12 @@ async def handle_ytdl_playlist_down(e: MessageLike) -> None:
         await e.answer("Not valid user, Dont touch.")
         return
     else:
-        await e.answer("Crunching Data.....")
+        await e.answer("Crunching Data...")
 
     await e.edit(buttons=None)
     path = os.path.join(os.getcwd(),"userdata",data[2]+".json")
     if os.path.exists(path):
-        await e.answer("Processing Please wait")
+        await e.answer("Processing, please wait")
         opdir = os.path.join(os.getcwd(),"userdata",data[2])
         if not os.path.exists(opdir):
             os.mkdir(opdir)
@@ -440,7 +439,7 @@ async def handle_ytdl_playlist_down(e: MessageLike) -> None:
 
 async def print_files(e,files):
     
-    msg = "#uploads\n"
+    msg = "#botuploads\n"
     if len(files) == 0:
         return
     

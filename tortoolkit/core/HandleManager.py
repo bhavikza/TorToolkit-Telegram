@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 from telethon import TelegramClient,events 
 from telethon import __version__ as telever
@@ -177,7 +176,7 @@ def add_handlers(bot: TelegramClient):
 async def handle_leech_command(e):
 
     if not e.is_reply:
-        await e.reply("Reply to a link or magnet")
+        await e.reply("Reply to a direct link or magnet")
     else:
         rclone = False
         tsp = time.time()
@@ -469,9 +468,9 @@ async def handle_pincode_cb(e):
         db = tor_db
         passw = db.get_password(data[1])
         if isinstance(passw,bool):
-            await e.answer("torrent expired download has been started now.")
+            await e.answer("Torrent expired download has been started now.")
         else:
-            await e.answer(f"Your Pincode if \"{passw}\"",alert=True)
+            await e.answer(f"Your Pincode is \"{passw}\"",alert=True)
 
         
     else:
@@ -479,7 +478,7 @@ async def handle_pincode_cb(e):
 
 async def upload_document_f(message):
     imsegd = await message.reply(
-        "processing ..."
+        "Processing ..."
     )
     imsegd = await message.client.get_messages(message.chat_id,ids=imsegd.id)
     if await is_admin(message.client, message.sender_id, message.chat_id):
@@ -627,15 +626,7 @@ async def about_me(message):
         f"<b>Leech:- </b> <code>{leen}</code>\n"
         f"<b>Rclone:- </b> <code>{rclone}</code>\n"
         f"<b>Rclone Mod :- </b> <code>{rclone_m}</code> \n"
-        f"<b>User Caps(Limits) :- </b> <code>In-progress</code> \n"
-        "\n"
-        f"<b>Latest {__version__} Changelog :- </b> Improved the YTDL error reporting.\n"
-        "Fixed a size bug in YTDL.\n"
-        "New /usettings menu for user settings.\n"
-        "Custom thumbnail Support.\n"
-        "User choice force documents.\n"
-        "Disable thumbnail also added.\n"
-        "You can now load custom rclone drives but its not yet implement to transfer to your drive. WIP \n"
+        f"<b>User Caps(Limits) :- </b> <code>In-progress</code> \n""
     )
 
     await message.reply(msg,parse_mode="html")

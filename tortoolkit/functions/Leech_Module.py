@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import re,os,shutil,time
 from telethon.tl import types
@@ -157,7 +156,7 @@ async def check_link(msg,rclone=False,is_zip=False, extract=False):
 
         elif msg.entities is not None:
             url = get_entities(msg)
-            torlog.info("Downloadinf Urls")
+            torlog.info("Downloading Urls")
             rmsg = await omess.reply("Processing the link.")
             #todo implement direct links ;)
             # weird stuff had to refect message
@@ -196,9 +195,9 @@ async def check_link(msg,rclone=False,is_zip=False, extract=False):
                     os.remove(path)
             except:pass
         else:
-            torlog.info("Downloadinf Url")
+            torlog.info("Downloading Url")
             #consider it as a direct link LOL
-            rmsg = await omess.reply("processing")
+            rmsg = await omess.reply("Processing")
 
             stat, path = await ariatools.aria_dl(omess.raw_text,"",rmsg,omess)
             if not isinstance(path,bool) and stat:
@@ -314,7 +313,7 @@ async def handle_ext_zip(path, rmess, omess):
 
 
 async def print_files(e,files):
-    msg = f"<a href='tg://user?id={e.sender_id}'>Done</a>\n#uploads\n"
+    msg = f"<a href='tg://user?id={e.sender_id}'>Done</a>\n#botuploads\n"
     if len(files) == 0:
         return
     
