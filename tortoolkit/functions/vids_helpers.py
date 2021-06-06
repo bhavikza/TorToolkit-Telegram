@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import os,logging
 from time import time

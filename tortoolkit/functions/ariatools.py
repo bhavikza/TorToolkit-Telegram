@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import asyncio, aria2p, logging, os
 from ..core.getVars import get_val
@@ -163,7 +162,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
                     pass
                 #
                 msg = f"\nDownloading File: <code>{downloading_dir_name}</code>"
-                msg += f"\n<b>Down:</b> {file.download_speed_string()} 🔽 <b>Up</b>: {file.upload_speed_string()} 🔼"
+                msg += f"\n<b>🔽 </b> {file.download_speed_string()} <b>🔼 </b> {file.upload_speed_string()}"
                 msg += f"\n<b>Progress:</b> {file.progress_string()}"
                 msg += f"\n<b>Size:</b> {file.total_length_string()}"
                 msg += f"\n<b>Info:</b>| P: {file.connections} |"
@@ -200,7 +199,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
                 aria2, gid, event, previous_message,user_msg=mes
             )
         else:
-            await event.edit(f"Download completed: <code>{file.name}</code> to path <code>{file.name}</code>",parse_mode="html", buttons=None)
+            await event.edit(f"<b>Download complete:</b> <code>{file.name}</code> to path <code>{file.name}</code>",parse_mode="html", buttons=None)
             return True
     except aria2p.client.ClientException as e:
         if " not found" in str(e) or "'file'" in str(e):
@@ -210,7 +209,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
             except:pass
 
             await event.edit(
-                "Download Canceled :\n<code>{}</code>".format(fname),
+                "<b>Download Cancelled:</b> <code>{}</code>".format(fname),
                 parse_mode="html"
             )
             return False
@@ -220,7 +219,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
     except RecursionError:
         file.remove(force=True)
         await event.edit(
-            "Download Auto Canceled :\n\n"
+            "Download Automatically Cancelled:\n"
             "Your Torrent/Link {} is Dead.".format(
                 file.name
             ),
@@ -231,7 +230,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message, rdepth = 0,
         torlog.info(str(e))
         if " not found" in str(e) or "'file'" in str(e):
             await event.edit(
-                "Download Canceled :\n<code>{}</code>".format(file.name),
+                "<b>Download Cancelled:</b> <code>{}</code>".format(file.name),
                 parse_mode="html"
             )
             return False

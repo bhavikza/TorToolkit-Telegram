@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import os,logging,time,traceback,shutil
 from ..core.getVars import get_val

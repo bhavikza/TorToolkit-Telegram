@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import asyncio,shlex,os,logging,time
 from typing import Union,Optional,List,Tuple

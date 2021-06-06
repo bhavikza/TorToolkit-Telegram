@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import qbittorrentapi as qba
 import asyncio as aio
@@ -176,7 +175,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
         if len(tor_info) > 0:
             tor_info = tor_info[0]
         else:
-            await message.edit("Torrent canceled ```{}``` ".format(torrent.name),buttons=None)
+            await message.edit("Torrent cancelled ```{}``` ".format(torrent.name),buttons=None)
             return True
         
         if tor_info.size > (get_val("MAX_TORRENT_SIZE") * 1024 * 1024 * 1024):
@@ -187,7 +186,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
             msg = "<b>Downloading:</b> <code>{}</code>\n".format(
                 tor_info.name
                 )
-            msg += "<b>Down:</b> {} <b>Up:</b> {}\n".format(
+            msg += "<b>⬇️ </b> {} <b>⬆️ </b> {}\n".format(
                 human_readable_bytes(tor_info.dlspeed,postfix="/s"),
                 human_readable_bytes(tor_info.upspeed,postfix="/s")
                 )
@@ -239,7 +238,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
                         await message.edit("Download path location failed", buttons=None)
                         return None
 
-                    await message.edit("Download completed ```{}```. To path ```{}```".format(tor_info.name,tor_info.save_path),buttons=None)
+                    await message.edit("<b>Download complete</b> ```{}```. To path ```{}```".format(tor_info.name,tor_info.save_path),buttons=None)
                     return [savepath, tor_info.hash]
                 else:
                     #return await update_progress(client,message,torrent)
@@ -251,7 +250,7 @@ async def update_progress(client,message,torrent,except_retry=0,sleepsec=None):
         except Exception as e:
             torlog.error("{}\n\n{}\n\nn{}".format(e,traceback.format_exc(),tor_info))
             try:
-                await message.edit("Error occure {}".format(e),buttons=None)
+                await message.edit("Error occurred {}".format(e),buttons=None)
             except:pass
             return False
 
@@ -261,7 +260,7 @@ async def pause_all(message):
     await aio.sleep(1)
     msg = ""
     tors = client.torrents_info(status_filter="paused|stalled")
-    msg += "⏸️ Paused total <b>{}</b> torrents ⏸️\n".format(len(tors))
+    msg += "⏸️ Paused <b>{}</b> torrents\n".format(len(tors))
 
     for i in tors:
         if i.progress == 1:
@@ -292,7 +291,7 @@ async def resume_all(message):
 async def delete_all(message):
     client = await get_client()
     tors = client.torrents_info()
-    msg = "☠️ Deleted <b>{}</b> torrents.☠️".format(len(tors))
+    msg = "🚮 Deleted <b>{}</b> torrents".format(len(tors))
     client.torrents_delete(delete_files=True,torrent_hashes="all")
 
     await message.reply(msg,parse_mode="html")

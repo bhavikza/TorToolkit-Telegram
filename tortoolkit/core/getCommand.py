@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 from ..consts.DefaultCommands import Commands
 import os,logging

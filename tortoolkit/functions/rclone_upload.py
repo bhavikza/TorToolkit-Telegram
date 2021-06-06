@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# (c) YashDK [yash-dk@github]
 
 import os,subprocess,logging,re,time,json,traceback
 from telethon.tl.types import KeyboardButtonUrl
@@ -57,7 +56,7 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
         rcres = await rclone_process_display(rclone_pr,edit_time,msg, message, omsg)
         
         if rcres is False:
-            await message.edit(message.text + "\nCanceled Rclone Upload")
+            await message.edit(message.text + "\nCancelled Rclone Upload")
             await msg.delete()
             rclone_pr.kill()
             return True
@@ -68,7 +67,7 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
         torlog.info(f"Upload folder id :- {gid}")
         
         folder_link = f"https://drive.google.com/folderview?id={gid}"
-        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#uploads\nUPLOADED FOLDER :-<code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))
+        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#botuploads\n📁 <code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))
         
         await omsg.reply(txtmsg,buttons=[[KeyboardButtonUrl("Drive URL",folder_link)]],parse_mode="html")
         await msg.delete()
@@ -90,7 +89,7 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
         rcres = await rclone_process_display(rclone_pr,edit_time,msg, message, omsg)
         
         if rcres is False:
-            await message.edit(message.text + "\nCanceled Rclone Upload")
+            await message.edit(message.text + "\nCancelled Rclone Upload")
             await msg.delete()
             rclone_pr.kill()
             return True
@@ -101,7 +100,7 @@ async def rclone_upload(path,message,user_msg,dest_drive,dest_base,edit_time,con
 
         file_link = f"https://drive.google.com/file/d/{gid}/view"
         
-        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#uploads\nUPLOADED FILE :-<code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))
+        txtmsg = "<a href='tg://user?id={}'>Done</a>\n#botuploads\n📁 <code>{}</code>\nTo Drive.".format(omsg.sender_id,os.path.basename(path))
 
         
         await omsg.reply(txtmsg,buttons=[[KeyboardButtonUrl("Drive URL",file_link)]],parse_mode="html")
