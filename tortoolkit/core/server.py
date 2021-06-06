@@ -5,6 +5,7 @@ import qbittorrentapi as qba
 from . import nodes
 from .database_handle import TtkTorrents
 import asyncio,logging,os,traceback
+import os, time
 
 torlog = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ routes = web.RouteTableDef()
 page = """
 <html>
 <head>
-<script src="https://raw.githubusercontent.com/devillD/JQuery-CSS-Library/main/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -32,7 +33,7 @@ p { font-size: 12px; margin: 24px;}
 </style>
 </head>
 <body>
-<h1>select file from below to download</h1>
+<h1>Select file/s below to download</h1>
 <form action="{form_url}" method="POST">
 
 {My_content}
@@ -103,7 +104,7 @@ $('input[type="checkbox"]').change(function(e) {
 code_page = """
 <html>
 <head>
-<link rel="stylesheet" href="https://raw.githubusercontent.com/devillD/JQuery-CSS-Library/main/bootstrap-4.5.2.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <title>
 Torrent Files
 </title>
@@ -268,18 +269,19 @@ async def set_priority(request):
 
 @routes.get('/')
 async def homepage(request):
-    return web.Response(text="<h1>Page by <a href=\"#https://t.me/unkusr\">UnkUsr</a></h1>",content_type="text/html")
+    #return web.Response(text="<h1>EMPTY <a href=\"#https://t.me/eeeee\">eeeee</a></h1>",content_type="text/html")
+    return web.Response(text="<h1>-</h1>",content_type="text/html")
 
 async def e404_middleware(app, handler):
   async def middleware_handler(request):
       try:
           response = await handler(request)
           if response.status == 404:
-              return web.Response(text="<h1>Kiddo, you are on wrong page</h2>",content_type="text/html")
+              return web.Response(text="<h1>404: Page not found</h2><br><h3>⛔️</h3>",content_type="text/html")
           return response
       except web.HTTPException as ex:
           if ex.status == 404:
-              return web.Response(text="<h1>Kiddo, you are on wrong page</h2>",content_type="text/html")
+              return web.Response(text="<h1>404: Page not found</h2><br><h3>⛔️</h3>",content_type="text/html")
           raise
   return middleware_handler
 
