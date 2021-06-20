@@ -69,7 +69,7 @@ async def upload_handel(path,message,from_uid,files_dict,job_id=0,force_edit=Fal
         
         if not from_in:
             if updb.get_cancel_status(message.chat_id,message.id):
-                await message.edit("{} - Cancled By user.".format(message.text),buttons=None)
+                await message.edit("{} - Cancelled by user.".format(message.text),buttons=None)
             else:
                 await message.edit(buttons=None)
             updb.deregister_upload(message.chat_id,message.id)
@@ -139,7 +139,7 @@ async def upload_handel(path,message,from_uid,files_dict,job_id=0,force_edit=Fal
             
             if not from_in:
                 if updb.get_cancel_status(message.chat_id,message.id):
-                    await message.edit("{} - Cancled By user.".format(message.text),buttons=None)
+                    await message.edit("{} - Cancelled by user.".format(message.text),buttons=None)
                 else:
                     await message.edit(buttons=None)
                 updb.deregister_upload(message.chat_id,message.id)
@@ -170,7 +170,7 @@ async def upload_handel(path,message,from_uid,files_dict,job_id=0,force_edit=Fal
 
             if not from_in:
                 if updb.get_cancel_status(message.chat_id,message.id):
-                    await message.edit("{} - Cancled By user.".format(message.text),buttons=None)
+                    await message.edit("{} - Cancelled by user.".format(message.text),buttons=None)
                 else:
                     await message.edit(buttons=None)
                 updb.deregister_upload(message.chat_id,message.id)
@@ -361,7 +361,7 @@ async def upload_a_file(path,message,force_edit,database=None,thumb_path=None,us
                     )
     except Exception as e:
         if str(e).find("cancel") != -1:
-            torlog.info("cancled an upload lol")
+            torlog.info("Cancelled an upload")
             await msg.delete()
         else:
             torlog.info(traceback.format_exc())
